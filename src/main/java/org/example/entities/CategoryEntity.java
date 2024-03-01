@@ -1,10 +1,12 @@
 package org.example.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,11 +19,11 @@ public class CategoryEntity {
     @Column(length = 255,nullable = false)
     private String name;
 
-    @Column(length = 255,nullable = false)
-    private String image;
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    private List<CategoryPhoto> images;
 
     @Column(length = 3500,nullable = false)
-    private String Description;
+    private String description;
 
     @Column(name = "date_created")
     //@Temporal(TemporalType.TIMESTAMP)
